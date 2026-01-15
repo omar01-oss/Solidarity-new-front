@@ -10,6 +10,13 @@ import ActivitiesCenters from './pages/ActivitiesCenters/ActivitiesCenters';
 import Community from "./pages/community/community";
 import LoginForm from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import { DashboardPage } from "./dashboard";
+import Galerie from "./pages/galerie/Galerie";
+
+import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import ContactPage from "./pages/ContactPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -24,10 +31,16 @@ function App() {
           <Route path="/book/:therapistId" element={<Layout children={<BookingPage />} />} />
           <Route path="/activities-centers" element={<Layout children={<ActivitiesCenters />} />} />
           <Route path="/community" element={<Layout children={<Community />} />} />
+          <Route path="/galerie" element={<Layout children={<Galerie />} /> } />
+          <Route path="/contact" element={<Layout children={<ContactPage />} /> } />
+          <Route path="/about" element={<Layout children={<AboutPage />} /> } />
 
           {/* Auth pages without Layout */}
+          <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/resetpass" element={<ResetPasswordPage />} />
+          <Route path="/forgetpass" element={<ForgotPasswordPage />} />
         </Routes>
       </Router>
     </ErrorBoundary>

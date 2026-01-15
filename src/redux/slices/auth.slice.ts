@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AuthState, AuthResponse, User } from "../../pages/auth/auth.types";
-import { authService } from "../../pages/auth/services/auth.service";
+
 
 const userFromStorage = localStorage.getItem("user")
   ? JSON.parse(localStorage.getItem("user")!)

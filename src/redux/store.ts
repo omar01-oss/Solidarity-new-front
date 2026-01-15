@@ -1,11 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import professionalsReducer from './slices/professionalsSlice';
-import authReducer from './slices/auth.slice'; // ✅ add this
+// src/redux/store.ts
+
+import { configureStore } from '@reduxjs/toolkit'
+import professionalsReducer from './slices/professionalsSlice'
+import authReducer from './slices/auth.slice'
+import dashboardReducer from '../dashboard/features/dashboardSlice'
+import galerieReducer from './slices/galerieSlice' // ✅ NEW - added galerie
 
 export const store = configureStore({
   reducer: {
     professionals: professionalsReducer,
-    auth: authReducer, // ✅ add this
+    auth: authReducer,
+    dashboard: dashboardReducer,
+    galerie: galerieReducer, // ✅ NEW - galerie slice
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -14,7 +20,8 @@ export const store = configureStore({
       },
       serializableCheck: false,
     }),
-});
+  devTools: process.env.NODE_ENV !== 'production',
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

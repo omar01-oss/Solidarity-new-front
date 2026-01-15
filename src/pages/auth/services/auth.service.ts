@@ -1,24 +1,60 @@
-// src/pages/auth/services/auth.service.ts
-import axios from "axios";
-import type { User, AuthResponse } from "../auth.types";
+// src/pages/auth/auth.types.ts
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/auth";
+export interface User {
+  _id?: string;
+  name: string;
+  email: string;
+  password?: string;
+  birthday?: string;
+  address?: string;
+  phoneNumber?: string;
+  isProfessional?: boolean;
+  professionalInfo?: ProfessionalInfo;
+  profilePicture?: string;
+}
 
-export const authService = {
-  register: async (user: User): Promise<AuthResponse> => {
-    const response = await axios.post(`${API_URL}/register`, user, { withCredentials: true });
-    return response.data;
-  },
-  login: async (credentials: { email: string; password: string }): Promise<AuthResponse> => {
-    const response = await axios.post(`${API_URL}/login`, credentials, { withCredentials: true });
-    return response.data;
-  },
-  forgotPassword: async (email: string): Promise<{ message: string }> => {
-    const response = await axios.post(`${API_URL}/forgot-password`, { email });
-    return response.data;
-  },
-  resetPassword: async (token: string, password: string): Promise<{ message: string }> => {
-    const response = await axios.post(`${API_URL}/reset-password/${token}`, { password });
-    return response.data;
-  },
-};
+export interface ProfessionalInfo {
+  specialty: string;
+  professionalSituation: string;
+  diplomaTitle: string;
+  institutionName: string;
+  graduationDate: string;
+  biography: string;
+  documentUrl?: string;
+}
+
+export interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  birthday: string;
+  address: string;
+  phoneNumber: string;
+  isProfessional: boolean;
+  professionalInfo?: ProfessionalInfo;
+  recaptchaToken: string;
+  document?: File;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+  recaptchaToken: string;
+}
+
+export interface AuthResponse {
+  user: User;
+  token: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  loading: boolean;
+  error: string | null;
+}
+
+export interface SocialAuthResponse {
+  user: User;
+  token: string;
+  isNewUser: boolean;
+}
