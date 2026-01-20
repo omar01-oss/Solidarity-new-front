@@ -24,7 +24,7 @@ const DashboardLoginPage: React.FC = () => (
         <div className="mt-4 space-y-3 text-xs">
           <div className="flex items-center justify-between">
             <Link
-              to="/forgetpass"
+              to=""
               className="text-indigo-400 hover:text-indigo-300 transition-colors"
             >
               Forgot password?
