@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 
 const LoginForm: React.FC = () => {
-  const { login, googleLogin, facebookLogin, loading, error } = useAuth();
+  const { login, loading, error } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -12,30 +12,6 @@ const LoginForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     login(form);
-  };
-
-  const handleGoogleLogin = () => {
-    window.google?.accounts.id.initialize({
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      callback: (response: any) => {
-        googleLogin(response.credential);
-      },
-    });
-    window.google?.accounts.id.prompt();
-  };
-
-  const handleFacebookLogin = () => {
-    window.FB?.login(
-      (response: any) => {
-        if (response.authResponse) {
-          facebookLogin(
-            response.authResponse.accessToken,
-            response.authResponse.userID
-          );
-        }
-      },
-      { scope: "public_profile,email" }
-    );
   };
 
   return (
@@ -95,30 +71,6 @@ const LoginForm: React.FC = () => {
           <p className="text-red-400 text-sm text-center">{error}</p>
         )}
       </form>
-
-      {/* Divider */}
-      <div className="my-6 text-center text-gray-400">Or continue with</div>
-
-      {/* Social Login Buttons */}
-      <div className="grid grid-cols-2 gap-4">
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          disabled={loading}
-          className="bg-white text-black py-3 rounded-xl"
-        >
-          Google
-        </button>
-
-        <button
-          type="button"
-          onClick={handleFacebookLogin}
-          disabled={loading}
-          className="bg-blue-600 text-white py-3 rounded-xl"
-        >
-          Facebook
-        </button>
-      </div>
     </div>
   );
 };
